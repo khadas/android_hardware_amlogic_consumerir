@@ -16,9 +16,19 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
+ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 26 && echo OK),OK)
+LOCAL_PROPRIETARY_MODULE := true
+endif
+
+LOCAL_C_INCLUDES += \
+    hardware/libhardware/include \
+    system/core/libcutils/include \
+    system/core/libutils/include \
+    system/core/libsystem/include
+
 LOCAL_MODULE := consumerir.amlogic
 LOCAL_MODULE_RELATIVE_PATH := hw
-LOCAL_SRC_FILES := consumerir.c
+LOCAL_SRC_FILES := consumerir.cpp
 LOCAL_SHARED_LIBRARIES := liblog libcutils
 LOCAL_MODULE_TAGS := optional
 
