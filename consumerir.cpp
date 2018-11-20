@@ -121,6 +121,10 @@ static int consumerir_transmit(struct consumerir_device *dev __unused,
         return -1;
     }
 
+    if (carrier_freq < 0) {
+        ALOGE("carrier freq <0");
+        return -1;
+    }
     //set duty cycle, it's a static value
     char dutyCycle[] = "55";
     writeSys(IR_DUTY_CYCLE, dutyCycle, strlen(dutyCycle));
